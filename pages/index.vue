@@ -27,6 +27,12 @@
       
     
   </form>
+  <ClientOnly>
+    <div class=" flex justify-center items-center gap-x-2 flex-row" >
+  <button class="btn-2" @click="clear"><Icon name="ic:sharp-delete-forever"/>clear</button>
+  <button class="btn-2" @click="refresh"><Icon name="uil:refresh"/>refresh</button>
+ </div>
+  </ClientOnly>
   <div class=" flex justify-center items-center mx-auto text-white md:flex-row flex-col gap-x-1">
   &copy; 2023 Copyright  <span class=" text-orange-500 text-lg"> Built with Nuxt3</span>
   </div>
@@ -109,10 +115,18 @@ export default {
     //     deep: true
     //   })
     // })
+    const clear=()=>{
+      messages.value=[]
+    }
+    const refresh=()=>{
+      window.location.reload()
+    }
 
     return {
       prompt,
       messages,
+      refresh,
+      clear,
       loadingIndicator,
       bot,
       load,
@@ -161,6 +175,12 @@ body {
   padding: 10px 20px;
   color: white;
 }
+.btn-2{
+  background-color: #1B0A0A;
+  border-radius: 10px;
+  padding: 10px 30px;
+  color: white;
+}
 
 /* hides scrollbar */
 #chat_container::-webkit-scrollbar {
@@ -176,8 +196,8 @@ body {
   background: #40414F;
 }
 .form-input{
-  position: absolute;
-  top: 70px;
+  position: relative;
+  bottom: 0px;
   width: 100%;
   max-width: 1280px;
   color: black;
@@ -267,12 +287,6 @@ textarea {
   outline: none;
 }
 
-button {
-  outline: 0;
-  border: 0;
-  cursor: pointer;
-  background: transparent;
-}
 
 form img {
   width: 30px;
