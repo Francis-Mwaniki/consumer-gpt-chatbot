@@ -18,12 +18,14 @@
     </div>
   </div>
   <form @submit.prevent="handleSubmit" class="form-input bg-slate-900" @keyup.enter="handleSubmit">
-   <textarea type="text" name="prompt" id="prompt" placeholder="Ask your question?" v-model="prompt"></textarea>
-    <button type="submit"  class=" btn">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+   <textarea type="text" name="prompt" :class="load?'bg-slate-500 cursor-not-allowed': ''" :disabled="load" :placeholder="load? 'Please wait while it loads....': 'Ask your question?'" id="prompt"  v-model="prompt"></textarea>
+    <button type="submit"  class=" btn"  :class="load?' cursor-not-allowed': ''">
+      <svg :class="load?' cursor-not-allowed': ''" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
     <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
 </svg>
     </button>
+      
+    
   </form>
   <div class=" flex justify-center items-center mx-auto text-white md:flex-row flex-col gap-x-1">
   &copy; 2023 Copyright  <span class=" text-orange-500 text-lg"> Built with Nuxt3</span>
@@ -44,16 +46,19 @@ export default {
     let usersvg = userr
     const bot = computed(() => {return botsvg })
     const user = computed(() =>{return usersvg })
+    const load =ref(false)
 
     function handleSubmit() {
       messages.value.push({
         isAi: false,
         text: prompt.value,
+       
       })
       messages.value.push({
         isAi: true,
         text: '',
         isLoading: true,
+
       })
 
       const messageDiv = messages.value[messages.value.length - 1]
@@ -64,7 +69,7 @@ export default {
           loadingIndicator.value = ''
         }
       }, 300)
-
+      load.value = true
       fetch('https://gpt-chat-sb66.onrender.com/', {
         method: 'POST',
         headers: {
@@ -76,6 +81,7 @@ export default {
         
       })
         .then((response) => {
+          load.value = false
           if (!response.ok) {
             throw new Error(response.text())
           } else {
@@ -109,6 +115,7 @@ export default {
       messages,
       loadingIndicator,
       bot,
+      load,
       user,
       handleSubmit
     }
