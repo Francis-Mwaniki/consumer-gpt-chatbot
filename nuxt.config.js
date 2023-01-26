@@ -1,7 +1,7 @@
 
 
 export default defineNuxtConfig({
-  modules: ['@nuxtjs/tailwindcss','nuxt-icon','@nuxt/image-edge','@nuxtjs/color-mode'],
+  modules: ['@nuxtjs/tailwindcss','nuxt-icon','@nuxt/image-edge','@nuxtjs/color-mode','@nuxtjs/supabase'],
   buildModules: [
 
   ],
