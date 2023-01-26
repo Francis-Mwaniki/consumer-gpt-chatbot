@@ -41,7 +41,7 @@ npm run preview
 
 # nice repo to checkout
 ```sh
-https://github.com/kibomamoses/Chat-AI
+https://github.com/kibomamoses/
 ```
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
 
