@@ -39,4 +39,9 @@ Locally preview production build:
 npm run preview
 ```
 
+# nice repo to checkout
+```sh
+https://github.com/kibomamoses/Chat-AI
+```
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+
